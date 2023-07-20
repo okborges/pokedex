@@ -1,0 +1,39 @@
+.bg-card {
+	display: grid;
+	width: 200px;
+	padding: 20px;
+	background-color: #fff;
+	justify-items: center;
+	border-radius: 20px;
+	text-align: center;
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+}
+
+span {
+	padding: 3px 6px;
+	border-radius: 43px;
+	background: #00838f;
+	color: #ffffff;
+}
+img {
+	margin: auto;
+	padding: 30px 0px;
+}
+
+h1 {
+	font-size: 22px;
+}
+
+h2,
+h3 {
+	width: fit-content;
+	padding: 2px 5px;
+	margin: 5px;
+	font-size: 16px;
+	border: 1px solid #000;
+	border-radius: 50px;
+}

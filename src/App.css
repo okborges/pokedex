@@ -1,0 +1,9 @@
+.container {
+	display: flex;
+	padding: 30px;
+	max-width: 1220px;
+	justify-content: center;
+	margin: auto;
+	gap: 20px;
+	background-color: #000;
+}
