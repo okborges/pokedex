@@ -1,27 +1,48 @@
-import { useState } from 'react'
 import './Cards.css'
-import Pokemons from './../../mooks/mook.json'
-import image from '../../svg/1.svg'
 
-export const Cards = ({ id, generation }) => {
-	const [pokemons, usePokemons] = useState(Pokemons)
-	console.log(pokemons)
-
+export const Cards = ({
+	id,
+	generation,
+	image,
+	name,
+	type,
+	habitat,
+	height,
+	weight,
+	power,
+}) => {
 	return (
 		<>
 			<div className="bg-card">
-				<header>
+				<header className="card-header">
 					<p>#{id}</p>
-					<span>Generation {generation}</span>
+					<p className="gen">Generation {generation}</p>
 				</header>
 
-				<img src={image} alt="" width={177} />
-				<h1>Bulbasaur</h1>
-				<h2>grass</h2>
-				<h3>shiny</h3>
-				<h4>Habitat: grassland</h4>
-				<p>Height 70cm / Weight 6.9kg</p>
-				<button>Power 318</button>
+				<div className="infos-card">
+					<img
+						src={image.one}
+						alt=""
+						width={150}
+						className="img-card"
+					/>
+					<h1 className="name">{name}</h1>
+
+					{type.map((item, index) => (
+						<h2 key={index} className="type">
+							{item}
+						</h2>
+					))}
+					
+					<h3 className="default">shiny</h3>
+					<h4 className="habitat">
+						<span>Habitat:</span> {habitat}
+					</h4>
+					<p className="infos">
+						Height {height}cm / Weight {weight}kg
+					</p>
+					<button className="power">Power {power}</button>
+				</div>
 			</div>
 		</>
 	)
