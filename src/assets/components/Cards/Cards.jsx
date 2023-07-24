@@ -1,4 +1,5 @@
-import './Cards.css'
+import './Cards.css';
+import image from '../../svg/1.svg';
 
 export const Cards = ({
 	id,
