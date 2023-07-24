@@ -1,30 +1,17 @@
 import './App.css'
-import { Cards } from './assets/components/Cards/Cards'
-import Pokemons from './assets/mooks/mook.json'
+import { Cards } from './components/Cards/Cards'
 
 function App() {
-	const poke = Pokemons
 	return (
 		<>
 			<div className="container">
-				{console.log(poke[0])}
-				{Pokemons.map((item) => (
-					<Cards
-						key={item.id}
-						id={item.id}
-						generation={item.generation}
-						image={item.image.default}
-						name={item.name}
-						type={item.type}
-						habitat={item.habitat}
-						height={item.height}
-						weight={item.weight}
-						power={item.power}
-					/>
-				))}
+				<Cards />
+				<Cards />
+				<Cards />
+				<Cards />
 			</div>
 		</>
 	)
 }
 
-export default App;
+export default App

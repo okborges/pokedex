@@ -1,12 +1,21 @@
 .container {
-    display: flex;
-    padding: 30px;
-    max-width: 1220px;
-    justify-content: center;
-    margin: auto;
-    gap: 20px;
-<<<<<<< HEAD
+	display: grid;
+	width: fit-content;
+	padding: 30px;
+	margin: auto;
+	justify-items: center;
+	gap: 20px;
+	grid-template-columns: repeat(4, 1fr);
 }
-=======
+
+@media screen and (max-width: 1200px) {
+	.container {
+		grid-template-columns: repeat(2, 1fr);
+	}
 }
->>>>>>> ef73ef4296a755b71ed68c071bf1782009bd08c0
+
+@media screen and (max-width: 620px) {
+	.container {
+		grid-template-columns: 1fr;
+	}
+}
