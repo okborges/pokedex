@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import BtnToggle from '../BtnToggle/BtnToggle'
 import './Cards.css'
+import '../../components/BtnToggle.css'
 import { useEffect, useState } from 'react'
 
 export const Cards = ({
@@ -64,7 +64,18 @@ export const Cards = ({
 						))}
 					</section>
 
-					<div></div>
+					<input
+						className="tgl tgl-default"
+						id={id}
+						type="checkbox"
+					/>
+					<label
+						className="tgl-btn"
+						htmlFor={id}
+						data-tg-off="Default"
+						data-tg-on="Shiny"
+						onClick={tradeShiny}
+					></label>
 
 					<h4 className="habitat">
 						<span>Habitat:</span> {habitat}
