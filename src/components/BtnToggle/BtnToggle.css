@@ -1,0 +1,48 @@
+.tgl {
+	display: none;
+}
+
+.tgl + .tgl-btn {
+	border-radius: 50px;
+	width: 62px;
+	height: 28px;
+	position: relative;
+	cursor: pointer;
+}
+
+.tgl-default + .tgl-btn {
+	overflow: hidden;
+	border: 1px solid #000;
+}
+
+.tgl-default + .tgl-btn:after,
+.tgl-default + .tgl-btn:before {
+	position: absolute;
+	transition: all 0.2s ease;
+	width: 100%;
+	text-align: center;
+	line-height: 30.5px;
+	font-size: 12px;
+}
+
+.tgl-default + .tgl-btn:after {
+	left: 100%;
+	content: attr(data-tg-on);
+}
+
+.tgl-default + .tgl-btn:before {
+	left: 0;
+	content: attr(data-tg-off);
+}
+
+.tgl-default:checked + .tgl-btn:before {
+	left: -100%;
+}
+
+.tgl-default:checked + .tgl-btn:after {
+	left: 0;
+}
+
+.tgl-default:checked + .tgl-btn {
+	background: #ffd70070;
+}
