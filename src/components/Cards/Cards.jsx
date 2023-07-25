@@ -14,22 +14,30 @@ export const Cards = ({
 	weight,
 	power,
 }) => {
-	const [shinyPokemon, setShinyPokemon] = useState('default')
-	const [images, setImages] = useState(image[shinyPokemon].two)
+	const [shinyPokemon, setShinyPokemon] = useState('normal')
+	const [images, setImages] = useState()
+	const [isActive, setIsActive] = useState()
+
+	const handleClick = () => {
+		setIsActive(!isActive)
+	}
+
 	function tradeShiny() {
-		if (shinyPokemon === 'default') {
+		handleClick()
+		if (isActive) {
 			setShinyPokemon('shiny')
 		} else {
-			setShinyPokemon('default')
+			setShinyPokemon('normal')
 		}
 	}
+
 	useEffect(() => {
-		setShinyPokemon('default')
-		setImages(image[shinyPokemon].two)
+		setShinyPokemon('normal');
+		setImages(image[shinyPokemon].two);
+		setIsActive(true);
 	}, [])
 	useEffect(() => {
-		if (shinyPokemon === 'default') {
-			console.log('entrou')
+		if (shinyPokemon === 'normal') {
 			setImages(image[shinyPokemon].two)
 		} else {
 			setImages(image[shinyPokemon].two)
@@ -64,18 +72,10 @@ export const Cards = ({
 						))}
 					</section>
 
-					<input
-						className="tgl tgl-default"
-						id={id}
-						type="checkbox"
-					/>
-					<label
-						className="tgl-btn"
-						htmlFor={id}
-						data-tg-off="Default"
-						data-tg-on="Shiny"
+					<button
+						className={`box ${!isActive ? 'active' : ''}`}
 						onClick={tradeShiny}
-					></label>
+					/>
 
 					<h4 className="habitat">
 						<span>Habitat:</span> {habitat}
