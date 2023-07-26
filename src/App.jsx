@@ -2,6 +2,7 @@ import './App.css'
 import { useState, useEffect } from 'react'
 import { Cards } from './components/Cards/Cards'
 import { api, baseUrl } from './api/api'
+import Loader from './components/loader/loader'
 
 function App() {
 	const [pokemons, setPokemons] = useState([])
@@ -41,6 +42,7 @@ function App() {
 
 	return (
 		<>
+			<Loader />
 			<div className="container">
 				{pokemons?.map((item) => (
 					<Cards
