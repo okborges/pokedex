@@ -2,6 +2,7 @@
 import './Cards.css'
 import '../../components/BtnToggle.css'
 import { useEffect, useState } from 'react'
+import ReactModal from 'react-modal'
 
 export const Cards = ({
 	id,
@@ -14,12 +15,23 @@ export const Cards = ({
 	weight,
 	power,
 }) => {
+	const [modalIsOpen, setIsOpen] = useState(false);
 	const [shinyPokemon, setShinyPokemon] = useState('normal')
 	const [images, setImages] = useState()
 	const [isActive, setIsActive] = useState()
 
 	const handleClick = () => {
 		setIsActive(!isActive)
+	}
+
+	function openModal() {
+		setIsOpen(true);
+		document.body.style.overflow = 'hidden';
+	}
+
+	function closeModal() {
+		setIsOpen(false);
+		document.body.style.overflow = 'unset';
 	}
 
 	function tradeShiny() {
@@ -46,7 +58,7 @@ export const Cards = ({
 
 	return (
 		<>
-			<div className="bg-card">
+			<div id={id} className="bg-card">
 				<header className="card-header">
 					<p>#{id}</p>
 					<p className="gen">Generation {generation}</p>
@@ -82,12 +94,27 @@ export const Cards = ({
 					</h4>
 
 					<p className="infos">
-						Height {height}cm / Weight {weight}kg
+						Height {height}m / Weight {weight}kg
 					</p>
 
-					<button className="power">Power {power}</button>
+					<button onClick={openModal} className="power">Power {power}</button>
 				</div>
 			</div>
+			<ReactModal
+				isOpen={modalIsOpen}
+				onRequestClose={closeModal}
+				contentLabel="Example Modal"
+			>
+				<button onClick={closeModal}>close</button>
+				<div>I am a modal</div>
+				<form>
+					<input />
+					<button>tab navigation</button>
+					<button>stays</button>
+					<button>inside</button>
+					<button>the modal</button>
+				</form>
+			</ReactModal>
 		</>
 	)
 }
