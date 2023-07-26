@@ -32,9 +32,9 @@ export const Cards = ({
 	}
 
 	useEffect(() => {
-		setShinyPokemon('normal');
-		setImages(image[shinyPokemon].two);
-		setIsActive(true);
+		setShinyPokemon('normal')
+		setImages(image[shinyPokemon].two)
+		setIsActive(true)
 	}, [])
 	useEffect(() => {
 		if (shinyPokemon === 'normal') {
@@ -49,7 +49,9 @@ export const Cards = ({
 			<div className="bg-card">
 				<header className="card-header">
 					<p>#{id}</p>
-					<p className="gen">Generation {generation}</p>
+					<p className={`gen gen-${generation}`}>
+						Generation {generation}
+					</p>
 				</header>
 
 				<div className="infos-card">
