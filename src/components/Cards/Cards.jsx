@@ -1,13 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import './Cards.css';
-import '../../components/BtnToggle.css';
-import { useEffect, useState } from 'react';
-import Modal from '../Modal/Modal';
+import './Cards.css'
+import '../../components/BtnToggle.css'
+import { useEffect, useState } from 'react'
+import Modal from '../Modal/Modal'
 
-export const Cards = ({
-	pokemon
-}) => {
-	const [modalIsOpen, setIsOpen] = useState(false);
+export const Cards = ({ pokemon }) => {
+	const [modalIsOpen, setIsOpen] = useState(false)
 	const [shinyPokemon, setShinyPokemon] = useState('normal')
 	const [images, setImages] = useState()
 	const [isActive, setIsActive] = useState()
@@ -17,13 +15,13 @@ export const Cards = ({
 	}
 
 	function openModal() {
-		setIsOpen(true);
-		document.body.style.overflow = 'hidden';
+		setIsOpen(true)
+		document.body.style.overflow = 'hidden'
 	}
 
 	function closeModal() {
-		setIsOpen(false);
-		document.body.style.overflow = 'unset';
+		setIsOpen(false)
+		document.body.style.overflow = 'unset'
 	}
 
 	function tradeShiny() {
@@ -53,15 +51,21 @@ export const Cards = ({
 			<div id={pokemon.id} className="bg-card">
 				<header className="card-header">
 					<p>#{pokemon.id}</p>
-					<p className={`gen gen-${pokemon.generation.toUpperCase()}`}>
+					<p
+						className={`gen gen-${pokemon.generation.toUpperCase()}`}
+					>
 						Generation {pokemon.generation.toUpperCase()}
 					</p>
 				</header>
 
 				<div className="infos-card">
 					<img
-						onMouseOver={() => setImages(pokemon.image[shinyPokemon].gif)}
-						onMouseLeave={() => setImages(pokemon.image[shinyPokemon].two)}
+						onMouseOver={() =>
+							setImages(pokemon.image[shinyPokemon].gif)
+						}
+						onMouseLeave={() =>
+							setImages(pokemon.image[shinyPokemon].two)
+						}
 						src={images}
 						alt=""
 						width={150}
@@ -91,12 +95,15 @@ export const Cards = ({
 						Height {pokemon.height}m / Weight {pokemon.weight}kg
 					</p>
 
-					<button onClick={openModal} className="power">Power {pokemon.power}</button>
+					<button onClick={openModal} className="power">
+						Power {pokemon.power}
+					</button>
 				</div>
 			</div>
-			<Modal 
-				modalIsOpen={modalIsOpen} 
+			<Modal
+				modalIsOpen={modalIsOpen}
 				closeModal={closeModal}
+				pokemon={pokemon}
 			/>
 		</>
 	)
