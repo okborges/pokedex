@@ -12,7 +12,7 @@ export default function Modal({ modalIsOpen, closeModal, pokemon }) {
 			<p>#{pokemon.id}</p>
 			<span>generation {pokemon.generation}</span>
 			<h1>{pokemon.name}</h1>
-			<img src={pokemon.image.normal.two} alt="" />
+			<img src={pokemon.image?.normal.two} alt="" />
 			<p>Specie: {pokemon.specie}</p>
 			<p>Descripition: {pokemon.description}</p>
 			
