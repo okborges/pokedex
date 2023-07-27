@@ -8,6 +8,16 @@
 	grid-template-columns: repeat(4, 1fr);
 }
 
+.botao-especial {
+	width: 120px;
+	height: 40px;
+	border-radius: 20px;
+	background-color: green;
+	position: fixed;
+	bottom: 5vh;
+	right: 2.5vw; 
+}
+
 @media screen and (max-width: 1200px) {
 	.container {
 		grid-template-columns: repeat(2, 1fr);
