@@ -18,7 +18,7 @@ function App() {
 	function userReachedBottom() {
 		const scrollPosition = window.scrollY + window.innerHeight
 		const documentHeight = document.documentElement.offsetHeight
-		return scrollPosition >= documentHeight
+		return scrollPosition >= (documentHeight - 150)
 	}
 
 	function addPokemons() {
@@ -32,9 +32,9 @@ function App() {
 					console.log(completeList)
 					setPokemons(completeList)
 					setLink(response.data.info.nextPage.replace(baseUrl, ''))
+					setLoading(false)
 				})
 				.catch((err) => console.error('Aconteceu algo de errado', err))
-			setLoading(false)
 		}
 	}
 
@@ -42,23 +42,15 @@ function App() {
 
 	return (
 		<>
-			<Loader />
 			<div className="container">
 				{pokemons?.map((item) => (
 					<Cards
-						key={item.id}
-						id={item.id}
-						generation={item.generation.toUpperCase()}
-						image={item.image}
-						name={item.name}
-						type={item.types}
-						habitat={item.habitat}
-						height={item.height}
-						weight={item.weight}
-						power={item.power}
+					key={item.id}
+					pokemon={item}
 					/>
-				))}
+					))}
 			</div>
+			<Loader />
 		</>
 	)
 }

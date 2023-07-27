@@ -1,19 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import './Cards.css'
-import '../../components/BtnToggle.css'
-import { useEffect, useState } from 'react'
-import ReactModal from 'react-modal'
+import './Cards.css';
+import '../../components/BtnToggle.css';
+import { useEffect, useState } from 'react';
+import Modal from '../Modal/Modal';
 
 export const Cards = ({
-	id,
-	generation,
-	image,
-	name,
-	type,
-	habitat,
-	height,
-	weight,
-	power,
+	pokemon
 }) => {
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const [shinyPokemon, setShinyPokemon] = useState('normal')
@@ -45,41 +37,41 @@ export const Cards = ({
 
 	useEffect(() => {
 		setShinyPokemon('normal')
-		setImages(image[shinyPokemon].two)
+		setImages(pokemon.image[shinyPokemon].two)
 		setIsActive(true)
 	}, [])
 	useEffect(() => {
 		if (shinyPokemon === 'normal') {
-			setImages(image[shinyPokemon].two)
+			setImages(pokemon.image[shinyPokemon].two)
 		} else {
-			setImages(image[shinyPokemon].two)
+			setImages(pokemon.image[shinyPokemon].two)
 		}
 	}, [shinyPokemon])
 
 	return (
 		<>
-			<div id={id} className="bg-card">
+			<div id={pokemon.id} className="bg-card">
 				<header className="card-header">
-					<p>#{id}</p>
-					<p className={`gen gen-${generation}`}>
-						Generation {generation}
+					<p>#{pokemon.id}</p>
+					<p className={`gen gen-${pokemon.generation.toUpperCase()}`}>
+						Generation {pokemon.generation.toUpperCase()}
 					</p>
 				</header>
 
 				<div className="infos-card">
 					<img
-						onMouseOver={() => setImages(image[shinyPokemon].gif)}
-						onMouseLeave={() => setImages(image[shinyPokemon].two)}
+						onMouseOver={() => setImages(pokemon.image[shinyPokemon].gif)}
+						onMouseLeave={() => setImages(pokemon.image[shinyPokemon].two)}
 						src={images}
 						alt=""
 						width={150}
 						height={150}
 						className="img-card"
 					/>
-					<h1 className="name">{name}</h1>
+					<h1 className="name">{pokemon.name}</h1>
 
 					<section className="section-type">
-						{type.map((item, index) => (
+						{pokemon.types.map((item, index) => (
 							<h2 key={index} className={`type type-${item}`}>
 								{item}
 							</h2>
@@ -92,31 +84,20 @@ export const Cards = ({
 					/>
 
 					<h4 className="habitat">
-						<span>Habitat:</span> {habitat}
+						<span>Habitat:</span> {pokemon.habitat}
 					</h4>
 
 					<p className="infos">
-						Height {height}m / Weight {weight}kg
+						Height {pokemon.height}m / Weight {pokemon.weight}kg
 					</p>
 
-					<button onClick={openModal} className="power">Power {power}</button>
+					<button onClick={openModal} className="power">Power {pokemon.power}</button>
 				</div>
 			</div>
-			<ReactModal
-				isOpen={modalIsOpen}
-				onRequestClose={closeModal}
-				contentLabel="Example Modal"
-			>
-				<button onClick={closeModal}>close</button>
-				<div>I am a modal</div>
-				<form>
-					<input />
-					<button>tab navigation</button>
-					<button>stays</button>
-					<button>inside</button>
-					<button>the modal</button>
-				</form>
-			</ReactModal>
+			<Modal 
+				modalIsOpen={modalIsOpen} 
+				closeModal={closeModal}
+			/>
 		</>
 	)
 }
