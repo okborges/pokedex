@@ -1,6 +1,6 @@
-import React from 'react'
 import { useState, useEffect } from 'react'
 import ReactModal from 'react-modal'
+import './Modal.css'
 
 export default function Modal({ modalIsOpen, closeModal, pokemon }) {
 	const [shinyPokemon, setShinyPokemon] = useState('normal')
@@ -39,29 +39,51 @@ export default function Modal({ modalIsOpen, closeModal, pokemon }) {
 			onRequestClose={closeModal}
 			contentLabel="Example Modal"
 		>
-			<button onClick={closeModal}>X</button>
-			<p>#{pokemon.id}</p>
-			<span>generation {pokemon.generation}</span>
-			<h1>{pokemon.name}</h1>
-			<img
-				onMouseOver={() =>
-					setImages(pokemon.image?.[shinyPokemon].gif)
-				}
-				onMouseLeave={() =>
-					setImages(pokemon.image?.[shinyPokemon].two)
-				}
-				src={images}
-				alt=""
-				width={400}
-				height={400}
-			/>
-			<button
-				className={`box ${!isActive ? 'active' : ''}`}
-				onClick={tradeShiny}
-			/>
-			<p>Specie: {pokemon.specie}</p>
-			<p>Descripition: {pokemon.description}</p>
+			<section className="modal-container">
+				<div className="container-header">
+					<p>#{pokemon.id}</p>
+					<span>Generation {pokemon.generation}</span>
+					<button onClick={closeModal} className="close-button">
+						&times;
+					</button>
+				</div>
 
+				<h1 className="title-modal">{pokemon.name}</h1>
+
+				<div className="infos-container">
+					<img
+						onMouseOver={() =>
+							setImages(pokemon.image?.[shinyPokemon].gif)
+						}
+						onMouseLeave={() =>
+							setImages(pokemon.image?.[shinyPokemon].two)
+						}
+						src={images}
+						alt=""
+						width={190}
+						height={190}
+					/>
+					<button
+						className={`box ${!isActive ? 'active' : ''}`}
+						onClick={tradeShiny}
+					/>
+					<p>
+						<span className="span-bold ">Specie:</span>{' '}
+						{pokemon.specie}
+					</p>
+					<p>
+						<span className="span-bold "> Descripition:</span>{' '}
+						{pokemon.description}
+					</p>
+
+					<div className="ability-container">
+						<span className="span-bold">Ability:</span>
+						{pokemon.ability?.map((item, index) => (
+							<p key={index}>{item.name}</p>
+						))}
+					</div>
+				</div>
+			</section>
 		</ReactModal>
 	)
 }

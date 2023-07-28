@@ -1,0 +1,33 @@
+.modal-container {
+	padding: 30px;
+}
+.container-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.close-button {
+	font-size: 30px;
+	background-color: transparent;
+}
+
+.title-modal {
+	text-align: center;
+}
+
+.infos-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+}
+
+.span-bold {
+	font-weight: 700;
+}
+.ability-container {
+	display: flex;
+	gap: 5px;
+}
