@@ -24,6 +24,7 @@
 .close-button {
 	font-size: 30px;
 	background-color: transparent;
+	cursor: pointer;
 }
 
 .title-modal {
