@@ -60,12 +60,14 @@ function App() {
 
 	return (
 		<>
-			<button onClick={openModal} style={{display: useKonamiCode() ? "block" : "none"}} className='botao-especial'>Clique aqui</button>
-			<Modal 
-				modalIsOpen={modalIsOpen} 
-				closeModal={closeModal}
-				pokemon
-			/>
+			<button onClick={openModal} style={{ display: useKonamiCode() ? "block" : "none" }} className='botao-especial'>Clique aqui</button>
+			<div style={{ display: modalIsOpen ? "block" : "none" }} className='div-card-special'>
+				{specialPokemons?.map((item) => (
+					<div style={{
+						margin: "5px"
+					}}><Cards key={item.id} pokemon={item} /></div>
+				))}
+			</div>
 			<div className="container">
 				{pokemons?.map((item) => (
 					<Cards key={item.id} pokemon={item} />

@@ -93,9 +93,7 @@ export default function Modal({ modalIsOpen, closeModal, pokemon }) {
 						<span className="span-bold">Evolutions:</span>
 
 						{pokemon.evolutions
-							?.join(' » ')
-							.split(' ')
-							.map((item, index) => (
+							?.map((item, index) => (
 								<p key={index} className="default">
 									{item}
 								</p>

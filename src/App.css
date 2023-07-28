@@ -8,6 +8,10 @@
 	grid-template-columns: repeat(4, 1fr);
 }
 
+.div-card-special{
+	display: flex;
+}
+
 .botao-especial {
 	width: 120px;
 	height: 40px;
