@@ -5,7 +5,7 @@ import './Modal.css'
 export default function Modal({ modalIsOpen, closeModal, pokemon }) {
 	const [shinyPokemon, setShinyPokemon] = useState('normal')
 	const [images, setImages] = useState()
-	const [isActive, setIsActive] = useState()
+	const [isActive, setIsActive] = useState(true)
 
 	function tradeShiny() {
 		handleClick()
@@ -23,6 +23,7 @@ export default function Modal({ modalIsOpen, closeModal, pokemon }) {
 	useEffect(() => {
 		setShinyPokemon('normal')
 		setImages(pokemon.image?.[shinyPokemon].two)
+		setIsActive(true)
 	}, [])
 
 	useEffect(() => {
@@ -43,7 +44,7 @@ export default function Modal({ modalIsOpen, closeModal, pokemon }) {
 				<div className="container-header">
 					<p>#{pokemon.id}</p>
 					<span className={'gen'}>
-						Generation {pokemon.generation}
+						Generation {pokemon.generation.toUpperCase()}
 					</span>
 					<button onClick={closeModal} className="close-button">
 						&times;
