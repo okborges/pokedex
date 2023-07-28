@@ -75,7 +75,7 @@ export const Cards = ({ pokemon }) => {
 					<h1 className="name">{pokemon.name}</h1>
 
 					<section className="section-type">
-						{pokemon.types.map((item, index) => (
+						{pokemon.types?.map((item, index) => (
 							<h2 key={index} className={`type type-${item}`}>
 								{item}
 							</h2>

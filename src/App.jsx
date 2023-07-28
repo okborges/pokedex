@@ -8,6 +8,7 @@ import Loader from './components/loader/loader'
 
 function App() {
 	const [pokemons, setPokemons] = useState([])
+	const [specialPokemons, setSpecialPokemons] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const [link, setLink] = useState('/pokemon?currentPage=1&pageSize=16')
@@ -18,14 +19,8 @@ function App() {
 		}
 	})
 
-	function openModal() {
+	function openPokemons() {
 		setIsOpen(true);
-		document.body.style.overflow = 'hidden';
-	}
-
-	function closeModal() {
-		setIsOpen(false);
-		document.body.style.overflow = 'unset';
 	}
 
 	function userReachedBottom() {
@@ -51,18 +46,29 @@ function App() {
 		}
 	}
 
+	useEffect(() => {
+		api.get('/pokemon/specials')
+			.then((response) => {
+				setSpecialPokemons(response.data.pokemons)
+			})
+			.catch((err) => console.error('Aconteceu algo de errado', err))
+	}, [])
+
 	useEffect(addPokemons, [loading])
 
 	console.log(useKonamiCode( ))
 
 	return (
 		<>
-			<button onClick={openModal} style={{display: useKonamiCode() ? "block" : "none"}} className='botao-especial'>Clique aqui</button>
-			<Modal 
-				modalIsOpen={modalIsOpen} 
-				closeModal={closeModal}
-				pokemon
-			/>
+			<button onClick={openPokemons} style={{display: useKonamiCode() ? "block" : "none"}} className='botao-especial'>Clique aqui</button>
+			<div style={{display: modalIsOpen ? "block" : "none"}}>
+				{specialPokemons?.map((item) => (
+						<Cards
+						key={item.id}
+						pokemon={item}
+						/>
+						))}
+			</div>
 			<div className="container">
 				{pokemons?.map((item) => (
 					<Cards
