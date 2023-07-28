@@ -9,7 +9,7 @@ import Loader from './components/loader/loader'
 function App() {
 	const [pokemons, setPokemons] = useState([])
 	const [loading, setLoading] = useState(true)
-	const [modalIsOpen, setIsOpen] = useState(false);
+	const [modalIsOpen, setIsOpen] = useState(false)
 	const [link, setLink] = useState('/pokemon?currentPage=1&pageSize=16')
 
 	window.addEventListener('scroll', () => {
@@ -19,19 +19,19 @@ function App() {
 	})
 
 	function openModal() {
-		setIsOpen(true);
-		document.body.style.overflow = 'hidden';
+		setIsOpen(true)
+		document.body.style.overflow = 'hidden'
 	}
 
 	function closeModal() {
-		setIsOpen(false);
-		document.body.style.overflow = 'unset';
+		setIsOpen(false)
+		document.body.style.overflow = 'unset'
 	}
 
 	function userReachedBottom() {
 		const scrollPosition = window.scrollY + window.innerHeight
 		const documentHeight = document.documentElement.offsetHeight
-		return scrollPosition >= (documentHeight - 150)
+		return scrollPosition >= documentHeight - 150
 	}
 
 	function addPokemons() {
@@ -53,23 +53,22 @@ function App() {
 
 	useEffect(addPokemons, [loading])
 
-	console.log(useKonamiCode( ))
+	console.log(useKonamiCode())
 
 	return (
 		<>
-			<button onClick={openModal} style={{display: useKonamiCode() ? "block" : "none"}} className='botao-especial'>Clique aqui</button>
-			<Modal 
-				modalIsOpen={modalIsOpen} 
-				closeModal={closeModal}
-				pokemon
-			/>
+			<button
+				onClick={openModal}
+				style={{ display: useKonamiCode() ? 'block' : 'none' }}
+				className="botao-especial"
+			>
+				Pokémons especiais
+			</button>
+			<Modal modalIsOpen={modalIsOpen} closeModal={closeModal} pokemon />
 			<div className="container">
 				{pokemons?.map((item) => (
-					<Cards
-					key={item.id}
-					pokemon={item}
-					/>
-					))}
+					<Cards key={item.id} pokemon={item} />
+				))}
 			</div>
 			<Loader />
 		</>

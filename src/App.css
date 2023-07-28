@@ -12,10 +12,10 @@
 	width: 120px;
 	height: 40px;
 	border-radius: 20px;
-	background-color: green;
+	background-color: #ffd70070;
 	position: fixed;
 	bottom: 5vh;
-	right: 2.5vw; 
+	right: 2.5vw;
 }
 
 @media screen and (max-width: 1200px) {
