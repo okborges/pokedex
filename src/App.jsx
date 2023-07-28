@@ -20,7 +20,7 @@ function App() {
 	})
 
 	function openModal() {
-		setIsOpen(true);
+		setIsOpen(true)
 	}
 
 	function userReachedBottom() {
@@ -60,12 +60,21 @@ function App() {
 
 	return (
 		<>
-			<button onClick={openModal} style={{ display: useKonamiCode() ? "block" : "none" }} className='botao-especial'>Clique aqui</button>
-			<div style={{ display: modalIsOpen ? "block" : "none" }} className='div-card-special'>
+			<button
+				onClick={openModal}
+				style={{ display: useKonamiCode() ? 'block' : 'none' }}
+				className="botao-especial"
+			>
+				Pokémons especiais
+			</button>
+			<div
+				style={{ display: modalIsOpen ? 'grid' : 'none' }}
+				className="div-card-special"
+			>
 				{specialPokemons?.map((item) => (
-					<div style={{
-						margin: "5px"
-					}}><Cards key={item.id} pokemon={item} /></div>
+					<div className="bg-card-especial">
+						<Cards key={item.id} pokemon={item} />
+					</div>
 				))}
 			</div>
 			<div className="container">

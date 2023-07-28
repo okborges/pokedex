@@ -8,8 +8,17 @@
 	grid-template-columns: repeat(4, 1fr);
 }
 
-.div-card-special{
-	display: flex;
+.div-card-special {
+	grid-template-columns: 1fr 1fr;
+	justify-items: center;
+	padding: 20px;
+}
+.bg-card-especial {
+	display: grid;
+	width: 380px;
+	padding: 20px;
+	border-radius: 20px;
+	justify-items: center;
 }
 
 .botao-especial {
