@@ -37,12 +37,14 @@ export default function Modal({ modalIsOpen, closeModal, pokemon }) {
 		<ReactModal
 			isOpen={modalIsOpen}
 			onRequestClose={closeModal}
-			contentLabel="Example Modal"
+			className={'ReactModal__Content'}
 		>
 			<section className="modal-container">
 				<div className="container-header">
 					<p>#{pokemon.id}</p>
-					<span>Generation {pokemon.generation}</span>
+					<span className={'gen'}>
+						Generation {pokemon.generation}
+					</span>
 					<button onClick={closeModal} className="close-button">
 						&times;
 					</button>
@@ -68,19 +70,35 @@ export default function Modal({ modalIsOpen, closeModal, pokemon }) {
 						onClick={tradeShiny}
 					/>
 					<p>
-						<span className="span-bold ">Specie:</span>{' '}
+						<span className="span-bold ">Specie: </span>
 						{pokemon.specie}
 					</p>
 					<p>
-						<span className="span-bold "> Descripition:</span>{' '}
+						<span className="span-bold ">Descripition: </span>
 						{pokemon.description}
 					</p>
 
 					<div className="ability-container">
-						<span className="span-bold">Ability:</span>
+						<span className="span-bold">Ability: </span>
+
 						{pokemon.ability?.map((item, index) => (
-							<p key={index}>{item.name}</p>
+							<p key={index} className="default">
+								{item.name}
+							</p>
 						))}
+					</div>
+
+					<div className="ability-container">
+						<span className="span-bold">Evolutions:</span>
+
+						{pokemon.evolutions
+							?.join(' » ')
+							.split(' ')
+							.map((item, index) => (
+								<p key={index} className="default">
+									{item}
+								</p>
+							))}
 					</div>
 				</div>
 			</section>
