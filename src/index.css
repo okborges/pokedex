@@ -14,73 +14,91 @@ body {
 
 .type-normal {
 	background-color: #c2c2a170;
+	color: #373700;
 }
 
 .type-flying {
 	background-color: #bab0d570;
+	color: #0d0031;
 }
 
 .type-ghost {
 	background-color: #73579770;
+	color: #14002e;
 }
 
 .type-dark {
 	background-color: #33333370;
+	color: #0f0f0f;
 }
 .type-steel {
 	background-color: #ccccde70;
+	color: #000050;
 }
 
 .type-ground {
 	background-color: #b1736c70;
+	color: #2d0500;
 }
 
 .type-poison {
 	background-color: #7c538c70;
+	color: #270037;
 }
 
 .type-grass {
 	background-color: #48d0b070;
+	color: #005541;
 }
 
 .type-fire {
 	background-color: #fb6c6c70;
+	color: #4a0000;
 }
 
 .type-electric {
 	background-color: #ffd86f70;
+	color: #281d00;
 }
 
 .type-fairy {
 	background-color: #f469a970;
+	color: #40001e;
 }
 
 .type-bug {
 	background-color: #c3ce7570;
+	color: #242900;
 }
 
 .type-fighting {
 	background-color: #d6b59170;
+	color: #351c00;
 }
 
 .type-water {
 	background-color: #609fb570;
+	color: #00212c;
 }
 
 .type-psychic {
 	background-color: #9b7fa670;
+	color: #290039;
 }
 
 .type-ice {
 	background-color: #7fccec70;
+	color: #001923;
 }
 
 .type-rock {
 	background-color: #a6aab670;
+	color: #001247;
 }
 
 .type-dragon {
 	background-color: #f9be0070;
+	color: #342700;
 }
 .type-shiny {
 	background-color: #ffd70070;

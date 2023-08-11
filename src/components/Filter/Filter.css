@@ -1,0 +1,28 @@
+.filterContainer {
+	display: grid;
+	justify-items: center;
+	margin: 15px;
+}
+
+.filterTitle {
+	border-bottom: 1px solid black;
+	margin-bottom: 15px;
+}
+.tagContainer {
+	width: fit-content;
+	grid-template-columns: repeat(6, 1fr);
+	gap: 15px;
+	transition: 3s;
+}
+
+.tag {
+	display: flex;
+	justify-content: center;
+	width: 105px;
+	color: #005541;
+	border-radius: 50px;
+}
+
+.checkbox:checked{
+	background-color: #000;
+}

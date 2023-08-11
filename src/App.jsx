@@ -4,6 +4,7 @@ import { Cards } from './components/Cards/Cards'
 import { api, baseUrl } from './api/api'
 import { useKonamiCode } from './components/KonamiCode/useKonamiCode'
 import Loader from './components/loader/loader'
+import { Filter } from './components/Filter/FIlter'
 
 function App() {
 	const [pokemons, setPokemons] = useState([])
@@ -66,7 +67,9 @@ function App() {
 			>
 				Pokémons especiais
 			</button>
-			
+
+			<Filter types={pokemons} />
+
 			<div
 				style={{ display: modalIsOpen ? 'grid' : 'none' }}
 				className="div-card-special"
