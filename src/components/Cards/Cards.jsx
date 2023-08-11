@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import './Cards.css'
 import '../../components/BtnToggle.css'
 import { useEffect, useState } from 'react'

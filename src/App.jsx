@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import { Cards } from './components/Cards/Cards'
 import { api, baseUrl } from './api/api'
 import { useKonamiCode } from './components/KonamiCode/useKonamiCode'
-import Modal from './components/Modal/Modal'
 import Loader from './components/loader/loader'
 
 function App() {
@@ -54,7 +53,7 @@ function App() {
 			.catch((err) => console.error('Aconteceu algo de errado', err))
 	}, [])
 
-	useEffect(addPokemons, [loading])
+	useEffect(addPokemons, [link, loading, pokemons])
 
 	console.log(useKonamiCode())
 
@@ -67,21 +66,24 @@ function App() {
 			>
 				Pokémons especiais
 			</button>
+			
 			<div
 				style={{ display: modalIsOpen ? 'grid' : 'none' }}
 				className="div-card-special"
 			>
 				{specialPokemons?.map((item) => (
-					<div className="bg-card-especial">
-						<Cards key={item.id} pokemon={item} />
+					<div key={item.id} className="bg-card-especial">
+						<Cards pokemon={item} />
 					</div>
 				))}
 			</div>
+
 			<div className="container">
 				{pokemons?.map((item) => (
 					<Cards key={item.id} pokemon={item} />
 				))}
 			</div>
+
 			<Loader />
 		</>
 	)
