@@ -1,0 +1,32 @@
+.containerNotFound{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.h2Sorry{
+    letter-spacing: 20px;
+    color: #EC1B4F;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+.container404{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.container404 p {
+    font: bold;
+    font-size: 150px;
+    color: #263344;
+}
+
+.pNotFound {
+    color: #263344;
+    font-weight: 900;
+    letter-spacing: 3px;
+    font-size: 17px;
+}

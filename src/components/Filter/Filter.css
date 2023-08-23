@@ -7,7 +7,9 @@
 .filterTitle {
 	border-bottom: 1px solid black;
 	margin-bottom: 15px;
+	cursor: pointer;
 }
+
 .tagContainer {
 	width: fit-content;
 	grid-template-columns: repeat(6, 1fr);
@@ -21,8 +23,35 @@
 	width: 105px;
 	color: #005541;
 	border-radius: 50px;
+	border: 2px solid transparent;
+	cursor: pointer;
+
 }
 
-.checkbox:checked{
-	background-color: #000;
+.applyFilter {
+	margin-top: 15px;
+	border-radius: 20px;
+	padding: 5px 15px;
+	cursor: pointer;
+}
+
+.applyFilter:hover {
+
+}
+
+.checkbox:checked + .tag{
+	border: 2px solid black
+}
+.tag:hover{
+	border: 2px solid rgba(0, 0, 0, 0.445)
+}
+
+.checkbox:disabled + .tag{
+	background-color: #cdcdcd75;
+    color: #00000055;
+	cursor: not-allowed;
+}
+
+.checkbox:disabled + .tag:hover{
+	border: 2px solid transparent;
 }

@@ -1,12 +1,15 @@
 //style
 import './Filter.css'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
-import filterList from './filterList.json'
+import typeslist from './typesList'
 
-export const Filter = ({ types }) => {
+export const Filter = ({ addTypeInFilter, filtersDisable, removeTypeInFilter, reqFilterPokemons }) => {
 	const [toggle, setToggle] = useState(false);
+	const typesRefs = useRef([])
+
+
 
 	return (
 		<div className="filterContainer">
@@ -14,21 +17,31 @@ export const Filter = ({ types }) => {
 				Filter by type
 			</button>
 			<ul className="tagContainer" style={{display: toggle ? 'grid' : 'none'}}>
-				{filterList.types.map((type) => (
-					<li key={type.name}>
+				{typeslist.map((type, index) => (
+					<li key={index}>
 						<input 
 							type="checkbox" 
 							className='checkbox' 
 							name="checkboxType"
-							value={type.name}
-							id={type.name} 
+							value={type}
+							id={type} 
 							style={{display: 'none'}}
-							onChange={e => console.log(e.target.checked, e.target.value)}
+							ref={(element) => typesRefs.current[index] = element}
+							onChange={e => {
+								if (e.target.checked) {
+									addTypeInFilter(e.target.value)
+
+								} else {
+									removeTypeInFilter(e.target.value)
+								}
+							}}
+							disabled={filtersDisable && !typesRefs.current[index].checked}
 						/>
-						<label htmlFor={type.name} className={`tag type-${type.name}`}>{type.name}</label>
+						<label key={index} htmlFor={type} className={`tag type-${type}`} disabled={false}>{type}</label>
 					</li>
 				))}
 			</ul>
+			<button style={{display: toggle ? 'grid' : 'none'}} className='applyFilter' onClick={reqFilterPokemons}>Apply filter</button>
 		</div>
 	)
 }

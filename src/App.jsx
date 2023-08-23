@@ -5,13 +5,29 @@ import { api, baseUrl } from './api/api'
 import { useKonamiCode } from './components/KonamiCode/useKonamiCode'
 import Loader from './components/loader/loader'
 import { Filter } from './components/Filter/FIlter'
+import NotFound from './components/NotFound/NotFound'
 
 function App() {
+	//Array of pokemons/specials that will be rendered
 	const [pokemons, setPokemons] = useState([])
 	const [specialPokemons, setSpecialPokemons] = useState([])
+
+	//filter logic by type
+	const [typeFilter, setTypeFilter] = useState([])
+	const [filtersDisable, setFiltersDisable] = useState(false)
+	const [notFound, setNotFound] = useState(false)
+
+	//variable to give permission to load new pokemons
 	const [loading, setLoading] = useState(true)
+
+	//variable to control the modal
 	const [modalIsOpen, setIsOpen] = useState(false)
-	const [link, setLink] = useState('/pokemon?currentPage=1&pageSize=16')
+
+	const [loader, setLoader] = useState(true)
+
+	//request link logic and request link
+	const [link, setLink] = useState('/pokemon?pageSize=16&currentPage=1')
+
 
 	window.addEventListener('scroll', () => {
 		if (userReachedBottom()) {
@@ -19,31 +35,40 @@ function App() {
 		}
 	})
 
+	function reqFilterPokemons() {
+		setPokemons([]);
+		if (typeFilter.length === 2) setLink(`pokemon?pageSize=16&currentPage=1&type1=${typeFilter[0]}&type2=${typeFilter[1]}`);
+		else if (typeFilter.length === 1) setLink(`pokemon?pageSize=16&currentPage=1&type1=${typeFilter[0]}`);
+		else {
+			setLink('/pokemon?pageSize=16&currentPage=1');
+		}
+		setLoading(true);
+		console.log(loading)
+	}
+
+	function userReachedBottom() {
+		if (window.innerHeight !== window.screen.height) {
+			const scrollPosition = window.scrollY + window.innerHeight
+			const documentHeight = document.getElementById('pokemonsCardContainer').offsetHeight
+			return scrollPosition >= documentHeight - 150
+		}
+	}
+
 	function openModal() {
 		setIsOpen(true)
 	}
 
-	function userReachedBottom() {
-		const scrollPosition = window.scrollY + window.innerHeight
-		const documentHeight = document.documentElement.offsetHeight
-		return scrollPosition >= documentHeight - 150
+	function addTypeInFilter(type) {
+		setTypeFilter((actualTypeFilter) => [
+			...actualTypeFilter,
+			type
+		])
 	}
 
-	function addPokemons() {
-		if (loading) {
-			api.get(link)
-				.then((response) => {
-					const completeList = [
-						...pokemons,
-						...response.data.pokemons,
-					]
-					console.log(completeList)
-					setPokemons(completeList)
-					setLink(response.data.info.nextPage.replace(baseUrl, ''))
-					setLoading(false)
-				})
-				.catch((err) => console.error('Aconteceu algo de errado', err))
-		}
+	function removeTypeInFilter(type) {
+		const newTypeArray = typeFilter?.filter((t) => t !== type)
+		setFiltersDisable(false)
+		setTypeFilter(newTypeArray)
 	}
 
 	useEffect(() => {
@@ -51,15 +76,48 @@ function App() {
 			.then((response) => {
 				setSpecialPokemons(response.data.pokemons)
 			})
-			.catch((err) => console.error('Aconteceu algo de errado', err))
+			.catch((err) => window.alert('OPS! Parece que a lLinkAPI caiu', err))
 	}, [])
 
-	useEffect(addPokemons, [link, loading, pokemons])
+	useEffect(() => {
+		if (typeFilter.length === 2) {
+			setFiltersDisable(true);
+		}
+	}, [typeFilter])
 
-	console.log(useKonamiCode())
+	useEffect(() => {
+		async function reqPokemons() {
+			try {
+				if (loading && link) {
+					setNotFound(false)
+					setLoader(true)
+					const res = await api.get(link)
+					setPokemons(actualPokemons => [
+						...actualPokemons,
+						...res.data.pokemons
+					])
+					const nextLink = res.data.info.nextPage?.replace(baseUrl, '');
+					if (nextLink) {
+						setLink(nextLink)
+					} else {
+						setLink(null)
+						setLoader(false)
+					}
+				}
+			} catch (err) {
+				if(err.response.status === 404) {
+					setNotFound(true)
+					setLoader(false)
+				}
+			} finally {
+				setLoading(false)
+			}
+		}
+		reqPokemons();
+	}, [loading])
 
 	return (
-		<>
+		<div>
 			<button
 				onClick={openModal}
 				style={{ display: useKonamiCode() ? 'block' : 'none' }}
@@ -68,8 +126,11 @@ function App() {
 				Pokémons especiais
 			</button>
 
-			<Filter types={pokemons} />
+			<Filter addTypeInFilter={addTypeInFilter} filtersDisable={filtersDisable} removeTypeInFilter={removeTypeInFilter} reqFilterPokemons={reqFilterPokemons} />
 
+		
+			{notFound && <NotFound />}
+			
 			<div
 				style={{ display: modalIsOpen ? 'grid' : 'none' }}
 				className="div-card-special"
@@ -81,14 +142,15 @@ function App() {
 				))}
 			</div>
 
-			<div className="container">
-				{pokemons?.map((item) => (
+
+			<div className="container" id='pokemonsCardContainer'>
+				{pokemons && pokemons.map((item) => (
 					<Cards key={item.id} pokemon={item} />
 				))}
 			</div>
 
-			<Loader />
-		</>
+			{loader && <Loader />}
+		</div>
 	)
 }
 
