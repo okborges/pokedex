@@ -1,7 +1,7 @@
 .filterContainer {
 	display: grid;
 	justify-items: center;
-	margin: 15px;
+	padding: 15px;
 }
 
 .filterTitle {
@@ -15,7 +15,7 @@
 	cursor: default;
 }
 
-.tagContainer{
+.tagContainer {
 	width: fit-content;
 	display: grid;
 	grid-template-columns: repeat(6, 1fr);
@@ -24,12 +24,12 @@
 
 .containerAnimate {
 	text-align: center;
-	transition: height .7s cubic-bezier(0.65, 0.12, 0.29, 1.04);
+	transition: height 0.7s cubic-bezier(0.65, 0.12, 0.29, 1.04);
 	overflow: hidden;
 }
 
 .containerAnimate.open {
-	height: 152px;
+	height: 162px;
 }
 
 .containerAnimate.close {
@@ -40,11 +40,9 @@
 	display: flex;
 	justify-content: center;
 	width: 105px;
-	color: #005541;
 	border-radius: 50px;
 	border: 2px solid transparent;
 	cursor: pointer;
-
 }
 
 .applyFilter {
@@ -52,26 +50,41 @@
 	border-radius: 20px;
 	padding: 5px 15px;
 	cursor: pointer;
+	background-color: #000000;
+	color: #ffffff;
 }
 
-.applyFilter:hover {
-
+.checkbox:checked + .tag {
+	border: 2px solid black;
+}
+.tag:hover {
+	border: 2px solid rgba(0, 0, 0, 0.445);
 }
 
-.checkbox:checked + .tag{
-	border: 2px solid black
-}
-.tag:hover{
-	border: 2px solid rgba(0, 0, 0, 0.445)
-}
-
-.checkbox:disabled + .tag{
+.checkbox:disabled + .tag {
 	background-color: #cdcdcd75;
-    color: #00000055;
+	color: #00000055;
 	cursor: not-allowed;
 }
 
-.checkbox:disabled + .tag:hover{
+.checkbox:disabled + .tag:hover {
 	border: 2px solid transparent;
 }
 
+@media screen and (max-width: 1200px) {
+	.tagContainer {
+		grid-template-columns: repeat(4, 1fr);
+	}
+	.containerAnimate.open {
+		height: 250px;
+	}
+}
+
+@media screen and (max-width: 620px) {
+	.tagContainer {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.containerAnimate.open {
+		height: 426px;
+	}
+}

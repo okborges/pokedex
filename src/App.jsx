@@ -15,7 +15,7 @@ function App() {
 	//filter logic by type
 	const [typeFilter, setTypeFilter] = useState([])
 	const [filtersDisable, setFiltersDisable] = useState(false)
-	const [buttonFilterDisabled, setButtonFilterDisabled] = useState(true);
+	const [buttonFilterDisabled, setButtonFilterDisabled] = useState(true)
 	const [notFound, setNotFound] = useState(false)
 
 	//variable to give permission to load new pokemons
@@ -29,7 +29,6 @@ function App() {
 	//request link logic and request link
 	const [link, setLink] = useState('/pokemonFromTo?pageSize=16&currentPage=1')
 
-
 	window.addEventListener('scroll', () => {
 		if (userReachedBottom()) {
 			setLoading(true)
@@ -37,20 +36,28 @@ function App() {
 	})
 
 	function reqFilterPokemons() {
-		setPokemons([]);
-		if (typeFilter.length === 2) setLink(`pokemonFromTo?pageSize=16&currentPage=1&type1=${typeFilter[0]}&type2=${typeFilter[1]}`);
-		else if (typeFilter.length === 1) setLink(`pokemonFromTo?pageSize=16&currentPage=1&type1=${typeFilter[0]}`);
+		setPokemons([])
+		if (typeFilter.length === 2)
+			setLink(
+				`pokemonFromTo?pageSize=16&currentPage=1&type1=${typeFilter[0]}&type2=${typeFilter[1]}`
+			)
+		else if (typeFilter.length === 1)
+			setLink(
+				`pokemonFromTo?pageSize=16&currentPage=1&type1=${typeFilter[0]}`
+			)
 		else {
-			setLink('/pokemonFromTo?pageSize=16&currentPage=1');
+			setLink('/pokemonFromTo?pageSize=16&currentPage=1')
 		}
-		setLoading(true);
+		setLoading(true)
 		console.log(loading)
 	}
 
 	function userReachedBottom() {
 		if (window.innerHeight !== window.screen.height) {
 			const scrollPosition = window.scrollY + window.innerHeight
-			const documentHeight = document.getElementById('pokemonsCardContainer').offsetHeight
+			const documentHeight = document.getElementById(
+				'pokemonsCardContainer'
+			).offsetHeight
 			return scrollPosition >= documentHeight - 150
 		}
 	}
@@ -60,10 +67,7 @@ function App() {
 	}
 
 	function addTypeInFilter(type) {
-		setTypeFilter((actualTypeFilter) => [
-			...actualTypeFilter,
-			type
-		])
+		setTypeFilter((actualTypeFilter) => [...actualTypeFilter, type])
 	}
 
 	function removeTypeInFilter(type) {
@@ -77,12 +81,14 @@ function App() {
 			.then((response) => {
 				setSpecialPokemons(response.data.pokemons)
 			})
-			.catch((err) => window.alert('OPS! Parece que a lLinkAPI caiu', err));
+			.catch((err) =>
+				window.alert('OPS! Parece que a lLinkAPI caiu', err)
+			)
 	}, [])
 
 	useEffect(() => {
 		if (typeFilter.length === 2) {
-			setFiltersDisable(true);
+			setFiltersDisable(true)
 		}
 	}, [typeFilter])
 
@@ -93,11 +99,14 @@ function App() {
 					setNotFound(false)
 					setLoader(true)
 					const res = await api.get(link)
-					setPokemons(actualPokemons => [
+					setPokemons((actualPokemons) => [
 						...actualPokemons,
-						...res.data.pokemons
+						...res.data.pokemons,
 					])
-					const nextLink = res.data.info.nextPage?.replace(baseUrl, '');
+					const nextLink = res.data.info.nextPage?.replace(
+						baseUrl,
+						''
+					)
 					setButtonFilterDisabled(false)
 					if (nextLink) {
 						setLink(nextLink)
@@ -107,7 +116,7 @@ function App() {
 					}
 				}
 			} catch (err) {
-				if(err.response.status === 404) {
+				if (err.response.status === 404) {
 					setNotFound(true)
 					setLoader(false)
 				}
@@ -115,7 +124,7 @@ function App() {
 				setLoading(false)
 			}
 		}
-		reqPokemons();
+		reqPokemons()
 	}, [loading])
 
 	return (
@@ -128,33 +137,30 @@ function App() {
 				Pokémons especiais
 			</button>
 
-			<Filter 
-				addTypeInFilter={addTypeInFilter} 
-				filtersDisable={filtersDisable} 
-				removeTypeInFilter={removeTypeInFilter} 
-				reqFilterPokemons={reqFilterPokemons} 
+			<Filter
+				addTypeInFilter={addTypeInFilter}
+				filtersDisable={filtersDisable}
+				removeTypeInFilter={removeTypeInFilter}
+				reqFilterPokemons={reqFilterPokemons}
 				buttonFilterDisabled={buttonFilterDisabled}
 			/>
 
-		
 			{notFound && <NotFound />}
-			
+
 			<div
 				style={{ display: modalIsOpen ? 'grid' : 'none' }}
 				className="div-card-special"
 			>
 				{specialPokemons?.map((item) => (
-					<div key={item.id} className="bg-card-especial">
-						<Cards pokemon={item} />
-					</div>
+					<Cards pokemon={item} key={item.id} />
 				))}
 			</div>
 
-
-			<div className="container" id='pokemonsCardContainer'>
-				{pokemons && pokemons.map((item) => (
-					<Cards key={item.id} pokemon={item} />
-				))}
+			<div className="container" id="pokemonsCardContainer">
+				{pokemons &&
+					pokemons.map((item) => (
+						<Cards key={item.id} pokemon={item} />
+					))}
 			</div>
 
 			{loader && <Loader />}

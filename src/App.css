@@ -1,44 +1,45 @@
 .container {
 	display: grid;
-	width: fit-content;
-	padding: 30px;
-	margin: auto;
-	justify-items: center;
 	gap: 20px;
 	grid-template-columns: repeat(4, 1fr);
+	justify-items: center;
+	margin: auto;
+	padding: 30px;
+	width: fit-content;
 }
 
 .div-card-special {
 	grid-template-columns: 1fr 1fr;
 	justify-items: center;
-	padding: 20px;
-}
-.bg-card-especial {
-	display: grid;
-	width: 380px;
-	padding: 20px;
-	border-radius: 20px;
-	justify-items: center;
+	margin: auto;
+	max-width: 1146px;
 }
 
 .botao-especial {
-	width: 120px;
-	height: 40px;
-	border-radius: 20px;
 	background-color: #ffd70070;
-	position: fixed;
+	border-radius: 20px;
 	bottom: 5vh;
+	height: 40px;
+	position: fixed;
 	right: 2.5vw;
+	width: 120px;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1230px) {
 	.container {
 		grid-template-columns: repeat(2, 1fr);
 	}
+	.div-card-special {
+		max-width: 575px;
+	}
 }
 
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 650px) {
 	.container {
 		grid-template-columns: 1fr;
+	}
+	.div-card-special {
+		grid-template-columns: 1fr;
+		gap: 20px;
 	}
 }
