@@ -15,6 +15,7 @@ function App() {
 	//filter logic by type
 	const [typeFilter, setTypeFilter] = useState([])
 	const [filtersDisable, setFiltersDisable] = useState(false)
+	const [buttonFilterDisabled, setButtonFilterDisabled] = useState(true);
 	const [notFound, setNotFound] = useState(false)
 
 	//variable to give permission to load new pokemons
@@ -26,7 +27,7 @@ function App() {
 	const [loader, setLoader] = useState(true)
 
 	//request link logic and request link
-	const [link, setLink] = useState('/pokemon?pageSize=16&currentPage=1')
+	const [link, setLink] = useState('/pokemonFromTo?pageSize=16&currentPage=1')
 
 
 	window.addEventListener('scroll', () => {
@@ -37,10 +38,10 @@ function App() {
 
 	function reqFilterPokemons() {
 		setPokemons([]);
-		if (typeFilter.length === 2) setLink(`pokemon?pageSize=16&currentPage=1&type1=${typeFilter[0]}&type2=${typeFilter[1]}`);
-		else if (typeFilter.length === 1) setLink(`pokemon?pageSize=16&currentPage=1&type1=${typeFilter[0]}`);
+		if (typeFilter.length === 2) setLink(`pokemonFromTo?pageSize=16&currentPage=1&type1=${typeFilter[0]}&type2=${typeFilter[1]}`);
+		else if (typeFilter.length === 1) setLink(`pokemonFromTo?pageSize=16&currentPage=1&type1=${typeFilter[0]}`);
 		else {
-			setLink('/pokemon?pageSize=16&currentPage=1');
+			setLink('/pokemonFromTo?pageSize=16&currentPage=1');
 		}
 		setLoading(true);
 		console.log(loading)
@@ -76,7 +77,7 @@ function App() {
 			.then((response) => {
 				setSpecialPokemons(response.data.pokemons)
 			})
-			.catch((err) => window.alert('OPS! Parece que a lLinkAPI caiu', err))
+			.catch((err) => window.alert('OPS! Parece que a lLinkAPI caiu', err));
 	}, [])
 
 	useEffect(() => {
@@ -97,6 +98,7 @@ function App() {
 						...res.data.pokemons
 					])
 					const nextLink = res.data.info.nextPage?.replace(baseUrl, '');
+					setButtonFilterDisabled(false)
 					if (nextLink) {
 						setLink(nextLink)
 					} else {
@@ -126,7 +128,13 @@ function App() {
 				Pokémons especiais
 			</button>
 
-			<Filter addTypeInFilter={addTypeInFilter} filtersDisable={filtersDisable} removeTypeInFilter={removeTypeInFilter} reqFilterPokemons={reqFilterPokemons} />
+			<Filter 
+				addTypeInFilter={addTypeInFilter} 
+				filtersDisable={filtersDisable} 
+				removeTypeInFilter={removeTypeInFilter} 
+				reqFilterPokemons={reqFilterPokemons} 
+				buttonFilterDisabled={buttonFilterDisabled}
+			/>
 
 		
 			{notFound && <NotFound />}
